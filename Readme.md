@@ -109,6 +109,8 @@ You can use web requests to fetch Azure Vault Secrets & set it as variable value
 
   
 
+
+```javascript
     {
     
     "account":"your_SF_account",
@@ -130,7 +132,7 @@ You can use web requests to fetch Azure Vault Secrets & set it as variable value
     "query":"Copy into SomeTable from @YourStage;"
     
     }
-
+```
   
 
     
@@ -480,6 +482,7 @@ Typical usage would be to place this at the end of a data pipeline and issue a c
   
   
 
+```javascript
     {
     
     "account":"your_SF_account",
@@ -501,7 +504,7 @@ Typical usage would be to place this at the end of a data pipeline and issue a c
     "query":"Copy into SomeTable from @YourStage;"
     
     }
-
+```
   
 
   

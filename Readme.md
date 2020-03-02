@@ -7,7 +7,7 @@
 
   
 
-***03/01/2020 - Initial version added***
+***03/01/2020 - Initial version added -  Download the [SnowflakeADF.zip](https://github.com/NickAkincilar/Azure-DataFactory-ADF-Snowflake-Connector/blob/master/SnowflakeADF/SnowflakeADF.zip?raw=true) file***
 
   
 

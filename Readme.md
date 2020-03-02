@@ -70,7 +70,7 @@ Connection attributes & the SQL command can be inserted in to JSON as **hard cod
 - **Using dynamic ADF variables.** Credentials & other attributes can be dynamically fetched from **Azure Key Vault** Secret keys where they are securely stored. (_Preferred_)
 
   
-
+```javascript
 {
 
 "account":"your_SF_account",
@@ -92,7 +92,7 @@ Connection attributes & the SQL command can be inserted in to JSON as **hard cod
 "query":"Copy into SomeTable from @YourStage;"
 
 }
-
+```
   
 
 <img src="https://raw.githubusercontent.com/NickAkincilar/Snowflake-Azure-DataFactory-Connector/master/images/Credentials_From_KeyVault.png" alt="drawing" width="500"/>

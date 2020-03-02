@@ -95,7 +95,7 @@ Connection attributes & the SQL command can be inserted in to JSON as **hard cod
 ```
   
 
-<img src="https://raw.githubusercontent.com/NickAkincilar/Snowflake-Azure-DataFactory-Connector/master/images/Credentials_From_KeyVault.png" alt="drawing" width="500"/>
+<img src="https://github.com/NickAkincilar/Azure-DataFactory-ADF-Snowflake-Connector/blob/master/images/Credentials_From_KeyVault.png?raw=true" alt="drawing" width="500"/>
 
   
 
@@ -139,7 +139,7 @@ You can use web requests to fetch Azure Vault Secrets & set it as variable value
 
   
 
-<img src="https://raw.githubusercontent.com/NickAkincilar/Snowflake-Azure-DataFactory-Connector/master/images/Credentials_Static.png" alt="drawing" width="500"/>
+<img src="https://raw.githubusercontent.com/NickAkincilar/Snowflake-Azure-DataFactory-Connector/master/images/Credentials_Static.png?raw=true" alt="drawing" width="500"/>
 
   # HOW TO INSTALL & CONFIGURE?
 
@@ -159,7 +159,7 @@ Typical usage would be to place this at the end of a data pipeline and issue a c
 
   
 
-<img src="https://raw.githubusercontent.com/NickAkincilar/Snowflake-Azure-DataFactory-Connector/master/images/Screenshot00001.png" alt="drawing" width="300"/>
+<img src="https://github.com/NickAkincilar/Azure-DataFactory-ADF-Snowflake-Connector/blob/master/images/Screenshot00001.png?raw=true" alt="drawing" width="300"/>
 
   
 
@@ -183,7 +183,7 @@ Typical usage would be to place this at the end of a data pipeline and issue a c
 
   
 
-<img src="https://raw.githubusercontent.com/NickAkincilar/Snowflake-Azure-DataFactory-Connector/master/images/Screenshot00002.png" alt="drawing" width="500"/>
+<img src="https://github.com/NickAkincilar/Azure-DataFactory-ADF-Snowflake-Connector/blob/master/images/Screenshot00002.png?raw=true" alt="drawing" width="500"/>
 
   
 
@@ -220,7 +220,7 @@ Typical usage would be to place this at the end of a data pipeline and issue a c
   
   
 
-<img src="https://raw.githubusercontent.com/NickAkincilar/Snowflake-Azure-DataFactory-Connector/master/images/Screenshot00004.png" alt="drawing" width="500"/>
+<img src="https://github.com/NickAkincilar/Azure-DataFactory-ADF-Snowflake-Connector/blob/master/images/Screenshot00004.png?raw=true" alt="drawing" width="500"/>
 
   
 
@@ -230,7 +230,7 @@ Typical usage would be to place this at the end of a data pipeline and issue a c
 
   
 
-<img src="https://raw.githubusercontent.com/NickAkincilar/Snowflake-Azure-DataFactory-Connector/master/images/Screenshot00005.png" alt="drawing" width="500"/>
+<img src="https://github.com/NickAkincilar/Azure-DataFactory-ADF-Snowflake-Connector/blob/master/images/Screenshot00005.png?raw=true" alt="drawing" width="500"/>
 
   
 
@@ -310,123 +310,31 @@ Typical usage would be to place this at the end of a data pipeline and issue a c
 <img src="https://github.com/NickAkincilar/Azure-DataFactory-ADF-Snowflake-Connector/blob/master/images/newappsetting2.png?raw=true" alt="drawing" width="400"/>
 
  - Don't forget to  **SAVE** the newly creared "**passcode**" setting. 
+  <img src="https://github.com/NickAkincilar/Azure-DataFactory-ADF-Snowflake-Connector/blob/master/images/newappsetting3.png?raw=true" alt="drawing" width="400"/>
 
-<img src="https://github.com/NickAkincilar/Azure-DataFactory-ADF-Snowflake-Connector/blob/master/images/newappsetting3.png?raw=true" alt="drawing" width="400"/>
+13. Click on the **FunctionApp** Name in the **breadcrumb list on top** to go back.
+	 <img src="https://github.com/NickAkincilar/Azure-DataFactory-ADF-Snowflake-Connector/blob/master/images/startfunction0.png?raw=true" alt="drawing" width="400"/>
+	 
+14. Click on **OVERVIEW** tab & click on **START**
+<img src="https://github.com/NickAkincilar/Azure-DataFactory-ADF-Snowflake-Connector/blob/master/images/startfunction2.png?raw=true" alt="drawing" width="400"/>
 
-13. Give it a unique name for the call
+15.  After it Starts SUCCESSFULLY
+ - On the left menu: expand **Functions** --> **YourFunctionName** --> **SnowflakeADF** & click on **MANAGE**
+ 
+- **COPY** the **default** key value under **FUNCTION KEYS** section and store it in a notepad (*this is the key to let ADF access this function*)
 
-  
+<img src="https://github.com/NickAkincilar/Azure-DataFactory-ADF-Snowflake-Connector/blob/master/images/copykey.png?raw=true" alt="drawing" width="700"/>
+ 
+ 
 
-1. Authorization level determines who can call this function?
-
-  
-
-- **Anonymous** = REST endpoint is open to public (still need to provide proper credentials for snowflake)
-
-  
-
-- **Function** = This requires sender to provide a unique API security key to make a connection o this REST end point
-
-  
-
-  
-
-<img src="https://raw.githubusercontent.com/NickAkincilar/Snowflake-Azure-DataFactory-Connector/master/images/Screenshot00012.png" alt="drawing" width="400"/>
-
-  
-
-14. Override the code the in RUN.CSX.
-
-  
-
-15. Copy &amp; Paste code from RUN.CSX file on [from this project](https://github.com/NickAkincilar/Snowflake-Azure-DataFactory-Connector/blob/master/ADF_RestCallSnowflake/run.csx) &amp; SAVE.
-
-  
-
-16. Copy necessary supporting files &amp; driver
-
-  
-
-1. Click on the FUNCTION APP name
-
-  
-
-2. Click PLATFORM FEATURES tab
-
-  
-
-3. Click Advanced tools(Kudu)
-
-  
-
-- Choose - Debug Console
-
-  
-
-- Pick - POWERSHELL
-
-  
-
-  
-
-<img src="https://raw.githubusercontent.com/NickAkincilar/Snowflake-Azure-DataFactory-Connector/master/images/Screenshot00013.png" alt="drawing" width="500"/>
-
-  
-
-  
-
-17. Navigate to site following path = \wwwroot\Your\_Function\_Name\
-
-  
-
-  
-
-<img src="https://raw.githubusercontent.com/NickAkincilar/Snowflake-Azure-DataFactory-Connector/master/images/Screenshot00014.png" alt="drawing" width="500"/>
-
-  
-
-18. [Download](https://github.com/NickAkincilar/Snowflake-Azure-DataFactory-Connector/archive/master.zip) the repository from this project &amp; unzip.
-
-  
-
-19. Drag &amp; drop the BIN folder in to the files area under your function folder
-
-  
-
-<img src="https://raw.githubusercontent.com/NickAkincilar/Snowflake-Azure-DataFactory-Connector/master/images/Screenshot00015.png" alt="drawing" width="800"/>
-
-  
-
-20. If you choose, Function Auth Level as. FUNCTION then you need to get the API call key to call this function
-
-  
-
-21. Go back to Function area
-
-  
-
-1. Click on **Function name**
-
-  
-
-2. Click on **Manage**
-
-  
-
-3. Click on **COPY** for the default function key &amp;  **store it in a text editor.**
-
-  
-
-  
-
-<img src="https://raw.githubusercontent.com/NickAkincilar/Snowflake-Azure-DataFactory-Connector/master/images/Screenshot00016.png" alt="drawing" width="500"/>
+14. Deploying  & configuring SnowflakeADF function is DONE!.
 
   
 
   
   
 
-# Setup (Part 2) - USE THE FUNCTION IN AZURE DATA FACTORY PIPELINE
+## Setup (Part 2) - USING THE FUNCTION IN AZURE DATA FACTORY PIPELINE
 
   
 
@@ -434,16 +342,16 @@ Typical usage would be to place this at the end of a data pipeline and issue a c
 
   
 
-2. Give it a name
+2. Give it descriptive name to what you plan to do. (example: ***Copy_Invoices_from_AzureBlob*** or ***FlattenJSONfilesToTable*** )
 
-- **Check Secure Input & Output** to hide connection info from being logged. <br/><br/>
-
-  
+   - **Check Secure Input & Output** to if you like to hide JSON connection info from being logged. <br/><br/>
 
   
+
+  
   
 
-<img src="https://raw.githubusercontent.com/NickAkincilar/Snowflake-Azure-DataFactory-Connector/master/images/Screenshot00017.png" alt="drawing" width="400"/>
+<img src="https://github.com/NickAkincilar/Azure-DataFactory-ADF-Snowflake-Connector/blob/master/images/Screenshot00017.png?raw=true" alt="drawing" width="400"/>
 
   
 
@@ -457,21 +365,21 @@ Typical usage would be to place this at the end of a data pipeline and issue a c
 
   
 
-- Set All Required Properties
+- Set All Required Properties to link to the Azufe function you created
 
   
 
-- Function Key = **Key value from step 21** (_if FUNCTION mode is used for security_)
+- for **Function Key** =Use the **Default Key value copied in step 15** 
 
   
 
   
 
-<img src="https://raw.githubusercontent.com/NickAkincilar/Snowflake-Azure-DataFactory-Connector/master/images/Screenshot00018.png" alt="drawing" width="500"/>
+<img src="https://github.com/NickAkincilar/Azure-DataFactory-ADF-Snowflake-Connector/blob/master/images/Screenshot00018.png?raw=true" alt="drawing" width="700"/>
 
   
 
-- Function Name = **Function name from Step #13**
+- Function Name = **Function name from Step #3**
 
   
 
@@ -481,48 +389,99 @@ Typical usage would be to place this at the end of a data pipeline and issue a c
 
   
 
-<img src="https://raw.githubusercontent.com/NickAkincilar/Snowflake-Azure-DataFactory-Connector/master/images/Screenshot00019.png" alt="drawing" width="500"/>
+<img src="https://github.com/NickAkincilar/Azure-DataFactory-ADF-Snowflake-Connector/blob/master/images/Screenshot00019.png?raw=true" alt="drawing" width="500"/>
 
   
 
-- Set BODY to following JSON format with Snowflake connection & SQL command attributes
+- Set BODY to following JSON format with Snowflake connection & SQL command attributes. leave host: blank if your region is  **US West (Oregon)**, otherwise use the following [SNOWFLAKE LINK](https://docs.snowflake.net/manuals/user-guide/intro-regions.html#specifying-region-information-in-your-account-hostname) to lookup the host name. (when using the list, **DO NOT include the account name** in the host. Example: if sample shows  **xy12345.ca-central-1.aws** use **host = ca-central-1.aws**
 
-  
-  
 
 ```javascript
     {
-    
+    "type":"RUN",
     "account":"your_SF_account",
-    
     "host":"",
-    
     "userid":"YourUserName",
-    
     "pw":"YourPassword",
-    
     "database":"db_name",
-    
     "schema":"PUBLIC",
-    
-    "role":"Your_ROLE",
-    
+    "role":"Your_ROLE", 
     "warehouse":"Warehouse_Name",
-    
     "query":"Copy into SomeTable from @YourStage;"
-    
     }
 ```
   
+4. Add a new **WEB** step in to canvas and connect them together.
+<img src="https://github.com/NickAkincilar/Azure-DataFactory-ADF-Snowflake-Connector/blob/master/images/webstep.png?raw=true" alt="drawing" width="600"/>
+
+5. Set the **properties** of **WEB** step as below
+- Give it a **Step Name** in **General** tab
+- Under **Settings tab**, Set the URL as Dynamic Content as follows where you replace **Snowflake_COPY** with the name of your **Azure Function Step** you gave on **Step #2**
+ `@activity('Snowflake_COPY').output.statusQueryGetUri`
+ - Set **Method = GET**
+  <img src="https://github.com/NickAkincilar/Azure-DataFactory-ADF-Snowflake-Connector/blob/master/images/webstep2.png?raw=true" alt="drawing" width="500"/>
+
+6. If you need to add additional steps based on the result of inital call, you can now attach them after WEB step.
+  <img src="https://github.com/NickAkincilar/Azure-DataFactory-ADF-Snowflake-Connector/blob/master/images/workflow.png?raw=true" alt="drawing" width="700"/>
+  
+7. In this case, I added IF logic that tests the outcome of the WAIT TILL DONE.
+- Output of a successful query is the QueryHistory result of the original query in JSON format. 
+- The dynamic expression to test a boolean outcome for the IF step is as follows: 
+   **To test if the outcome is "Success"**
+    `@equals(activity('Wait Till Done').output.Status,'Success')`
+    
+     **To test if the Rows_Produced from the Query = "15"**
+    `@equals(activity('Wait Till Done').output.Rows[0].ROWS_PRODUCED,'3')`
+
+Sample output:
+```javascript
+ { "Status": "Success", 
+ "Rows": [ 
+	       { 
+	         "QUERY_ID": "01929f.......0223c2", 
+	         "QUERY_TEXT": "SOME SQL;", 
+	         "DATABASE_NAME": "SOME_DB_NAME", 
+	         "SCHEMA_NAME": "PUBLIC", 
+	         "QUERY_TYPE": "UNKNOWN", 
+	         "SESSION_ID": "..", 
+	         "USER_NAME": "YOUR_USERID", 
+	         "ROLE_NAME": "YOUR_ROLENAME", 
+	         "WAREHOUSE_NAME": "MY_WAREHOSUE", 
+	         "WAREHOUSE_SIZE": "", 
+	         "WAREHOUSE_TYPE": "STANDARD", 
+	         "CLUSTER_NUMBER": "", 
+	         "QUERY_TAG": "", 
+	         "EXECUTION_STATUS": "SUCCESS", 
+	         "ERROR_CODE": "", 
+	         "ERROR_MESSAGE": "", 
+	         "START_TIME": "03/02/2020 18:23:49 +00:00", 
+	         "END_TIME": "03/02/2020 18:23:49 +00:00", 
+	         "TOTAL_ELAPSED_TIME": "163", 
+	         "BYTES_SCANNED": "0", 
+	         "ROWS_PRODUCED": "0", 
+	         "COMPILATION_TIME": "161", 
+	         "EXECUTION_TIME": "2", 
+	         "QUEUED_PROVISIONING_TIME": "0", 
+	         "QUEUED_REPAIR_TIME": "0", 
+	         "QUEUED_OVERLOAD_TIME": "0", 
+	         "TRANSACTION_BLOCKED_TIME": "0", 
+	         "OUTBOUND_DATA_TRANSFER_CLOUD": "", 
+	         "OUTBOUND_DATA_TRANSFER_REGION": "", 
+	         "OUTBOUND_DATA_TRANSFER_BYTES": "0", 
+	         "INBOUND_DATA_TRANSFER_CLOUD": "", 
+	         "INBOUND_DATA_TRANSFER_REGION": "", 
+	         "INBOUND_DATA_TRANSFER_BYTES": "0", 
+	         "CREDITS_USED_CLOUD_SERVICES": "0.000025000" 
+	        } 
+         ] 
+}
+```
+ 
+9. Click **DEBUG** on the PIPELINE to test. 
 
   
 
-4. **DEBUG** on the PIPELINE to test.
+If the data settings were correct & queries execute successfully, each step in ADF will pass. If the query returns error, step will fail with error message.
 
-  
+That's it. Feel free to use this & use github to reach out if you have questions, encounter issues or additional change requests.  
 
-  
-
-If the data pipeline was able to successfully create output files, it will trigger the Azure Function and that would connect to Snowflake and Execute the SQL command using the attributes of the JSON post data.
-
-<img src="https://raw.githubusercontent.com/NickAkincilar/Snowflake-Azure-DataFactory-Connector/master/images/Screenshot00020.png" alt="drawing" width="800"/>

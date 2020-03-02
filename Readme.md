@@ -118,45 +118,15 @@ Connection attributes & the SQL command can be inserted in to JSON as **hard cod
 ```javascript
 
 {
-
-  
-
 "account":"your_SF_account",
-
-  
-
 "host":"",
-
-  
-
 "userid":"@{variables('v_user')}",
-
-  
-
 "pw":"@{variables('v_pw')}",
-
-  
-
 "database":"db_name",
-
-  
-
 "schema":"PUBLIC",
-
-  
-
 "role":"Your_ROLE",
-
-  
-
 "warehouse":"Warehouse_Name",
-
-  
-
 "query":"Copy into SomeTable from @YourStage;"
-
-  
-
 }
 
 ```
@@ -189,25 +159,15 @@ You can use web requests to fetch Azure Vault Secrets & set it as variable value
 ```javascript
 
 {
-
 "account":"your_SF_account",
-
 "host":"",
-
 "userid":"YourUserName",
-
 "pw":"YourPassword",
-
 "database":"db_name",
-
 "schema":"PUBLIC",
-
 "role":"Your_ROLE",
-
 "warehouse":"Warehouse_Name",
-
 "query":"Copy into SomeTable from @YourStage;"
-
 }
 
 ```
@@ -592,27 +552,16 @@ Typical usage would be to place this at the end of a data pipeline and issue a c
 ```javascript
 
 {
-
 "type":"RUN",
-
 "account":"your_SF_account",
-
 "host":"",
-
 "userid":"YourUserName",
-
 "pw":"YourPassword",
-
 "database":"db_name",
-
 "schema":"PUBLIC",
-
 "role":"Your_ROLE",
-
 "warehouse":"Warehouse_Name",
-
 "query":"Copy into SomeTable from @YourStage;"
-
 }
 
 ```
@@ -666,75 +615,40 @@ Sample output:
 "Rows": [
 
 {
-
 "QUERY_ID": "01929f.......0223c2",
-
 "QUERY_TEXT": "SOME SQL;",
-
 "DATABASE_NAME": "SOME_DB_NAME",
-
 "SCHEMA_NAME": "PUBLIC",
-
 "QUERY_TYPE": "UNKNOWN",
-
 "SESSION_ID": "..",
-
 "USER_NAME": "YOUR_USERID",
-
 "ROLE_NAME": "YOUR_ROLENAME",
-
 "WAREHOUSE_NAME": "MY_WAREHOSUE",
-
 "WAREHOUSE_SIZE": "",
-
 "WAREHOUSE_TYPE": "STANDARD",
-
 "CLUSTER_NUMBER": "",
-
 "QUERY_TAG": "",
-
 "EXECUTION_STATUS": "SUCCESS",
-
 "ERROR_CODE": "",
-
 "ERROR_MESSAGE": "",
-
 "START_TIME": "03/02/2020 18:23:49 +00:00",
-
 "END_TIME": "03/02/2020 18:23:49 +00:00",
-
 "TOTAL_ELAPSED_TIME": "163",
-
 "BYTES_SCANNED": "0",
-
 "ROWS_PRODUCED": "0",
-
 "COMPILATION_TIME": "161",
-
 "EXECUTION_TIME": "2",
-
 "QUEUED_PROVISIONING_TIME": "0",
-
 "QUEUED_REPAIR_TIME": "0",
-
 "QUEUED_OVERLOAD_TIME": "0",
-
 "TRANSACTION_BLOCKED_TIME": "0",
-
 "OUTBOUND_DATA_TRANSFER_CLOUD": "",
-
 "OUTBOUND_DATA_TRANSFER_REGION": "",
-
 "OUTBOUND_DATA_TRANSFER_BYTES": "0",
-
 "INBOUND_DATA_TRANSFER_CLOUD": "",
-
 "INBOUND_DATA_TRANSFER_REGION": "",
-
 "INBOUND_DATA_TRANSFER_BYTES": "0",
-
 "CREDITS_USED_CLOUD_SERVICES": "0.000025000"
-
 }
 
 ]

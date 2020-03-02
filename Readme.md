@@ -32,7 +32,7 @@ Because of these limitations, my first version of ADF Snowflake connector execut
 
 
 
-Solution is a regular Azure Function app which mimics the output of a Durable function. Major change was where the durable function was actually executing & waiting for original query to be finished to report back the result, I had to build something that didnt waited around for long runnning queries to finish. Below is how it was done to satisfy all 3 requests from Ver-1 users.
+Solution is a regular Azure Function app which mimics the output of a Durable function. Major change was where the durable function was actually executing & waiting for original query to be finished to report back the result, I had to build something that didn't wait around for long runnning queries to finish. Below is how I was able to satisfy all 3 major requests from users of my initial connector.
 
  1. ADF makes a rest call to Snowflake_Function & submits a JSON payload with a Query to execute. (JSON includes Snowflake connection parameters + the SQL statement )
  

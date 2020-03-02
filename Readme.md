@@ -109,29 +109,32 @@ You can use web requests to fetch Azure Vault Secrets & set it as variable value
 
   
 
-{
-
-"account":"your_SF_account",
-
-"host":"",
-
-"userid":"YourUserName",
-
-"pw":"YourPassword",
-
-"database":"db_name",
-
-"schema":"PUBLIC",
-
-"role":"Your_ROLE",
-
-"warehouse":"Warehouse_Name",
-
-"query":"Copy into SomeTable from @YourStage;"
-
-}
+    {
+    
+    "account":"your_SF_account",
+    
+    "host":"",
+    
+    "userid":"YourUserName",
+    
+    "pw":"YourPassword",
+    
+    "database":"db_name",
+    
+    "schema":"PUBLIC",
+    
+    "role":"Your_ROLE",
+    
+    "warehouse":"Warehouse_Name",
+    
+    "query":"Copy into SomeTable from @YourStage;"
+    
+    }
 
   
+
+    
+
   
 
 <img src="https://raw.githubusercontent.com/NickAkincilar/Snowflake-Azure-DataFactory-Connector/master/images/Credentials_Static.png" alt="drawing" width="500"/>
@@ -477,27 +480,27 @@ Typical usage would be to place this at the end of a data pipeline and issue a c
   
   
 
-{
-
-"account":"your_SF_account",
-
-"host":"",
-
-"userid":"YourUserName",
-
-"pw":"YourPassword",
-
-"database":"db_name",
-
-"schema":"PUBLIC",
-
-"role":"Your_ROLE",
-
-"warehouse":"Warehouse_Name",
-
-"query":"Copy into SomeTable from @YourStage;"
-
-}
+    {
+    
+    "account":"your_SF_account",
+    
+    "host":"",
+    
+    "userid":"YourUserName",
+    
+    "pw":"YourPassword",
+    
+    "database":"db_name",
+    
+    "schema":"PUBLIC",
+    
+    "role":"Your_ROLE",
+    
+    "warehouse":"Warehouse_Name",
+    
+    "query":"Copy into SomeTable from @YourStage;"
+    
+    }
 
   
 

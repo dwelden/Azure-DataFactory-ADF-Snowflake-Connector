@@ -25,6 +25,12 @@ Because of these limitations, my first version of ADF Snowflake connector execut
  - They needed the use query outcome (suchs rows effected) to use it in their pipeline decisions down stream.
  - They prefered not to pay for dedicated Function App instances.
 
+**
+
+## SO HOW DOES IT WORK?
+
+**
+
 Solution was a regular app that mimiced the output of a Durable function. Major change was where the durable function was actually executing & waiting for query to be finished to report back the result, I had to build something that didnt waited around for long runnning queries to finish. Below is how it was done to satisfy all 3 requests from Ver1 users.
 
  1. ADF makes a rest call to Snowflake_Function & submits a JSON payload. (JSON includes Snowflake connection parameters + the SQL statement to execute)

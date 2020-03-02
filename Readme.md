@@ -201,13 +201,13 @@ Typical usage would be to place this at the end of a data pipeline and issue a c
 
   
 
-- Plan Type = You Choice
+- Plan Type = Consumption is OK (as timeouts are not an issue)
 
   
 
   
 
-<img src="https://raw.githubusercontent.com/NickAkincilar/Snowflake-Azure-DataFactory-Connector/master/images/Screenshot00003.png" alt="drawing" width="500"/>
+<img src="https://github.com/NickAkincilar/Azure-DataFactory-ADF-Snowflake-Connector/blob/master/images/FunctionConfig.png?raw=true" alt="drawing" width="500"/>
 
   
 
@@ -236,74 +236,82 @@ Typical usage would be to place this at the end of a data pipeline and issue a c
 
   
 
-7. Click on NEW FUNCTION
+7. Click on the **Function APP name** then click **STOP**
 
   
   
 
-<img src="https://raw.githubusercontent.com/NickAkincilar/Snowflake-Azure-DataFactory-Connector/master/images/Screenshot00006.png" alt="drawing" width="500"/>
+<img src="https://github.com/NickAkincilar/Azure-DataFactory-ADF-Snowflake-Connector/blob/master/images/StopFunction1.png?raw=true" alt="drawing" width="500"/>
 
   
 
-8. Use IN-PORTAL option
-
-  
-
-  
-
-<img src="https://raw.githubusercontent.com/NickAkincilar/Snowflake-Azure-DataFactory-Connector/master/images/Screenshot00007.png" alt="drawing" width="500"/>
-
-  
-
-9. Use WEBHOOK + API
+8. Click on **Platform Features** tab then choose **Advanced Tools (Kudu)**
 
   
 
   
+<img src="https://github.com/NickAkincilar/Azure-DataFactory-ADF-Snowflake-Connector/blob/master/images/PlatformFeatures.png?raw=true" alt="drawing" width="500"/>
 
-<img src="https://raw.githubusercontent.com/NickAkincilar/Snowflake-Azure-DataFactory-Connector/master/images/Screenshot00008.png" alt="drawing" width="500"/>
+  
+
+9. Click on **Debug Console** then Choose **Power Shell**
 
   
 
   
 
-10. It will automatically create a function called HTTPTrigger1 which you need to delete
-
-  
-
-- Click on FUNCTIONS on the left
-
-  
-
-- Click on Trash can Icon to delete for HTTPTrigger1
+<img src="https://github.com/NickAkincilar/Azure-DataFactory-ADF-Snowflake-Connector/blob/master/images/Kudu.png?raw=true" alt="drawing" width="500"/>
 
   
 
   
 
-<img src="https://raw.githubusercontent.com/NickAkincilar/Snowflake-Azure-DataFactory-Connector/master/images/Screenshot00009.png" alt="drawing" width="500"/>
+10. This will open a new Powershell window with a directory navigation UI on top.
 
   
 
-11. Click on NEW FUNCTION to add your own
+- Navigate to **./site/wwwroot/** folder
 
   
 
-<img src="https://raw.githubusercontent.com/NickAkincilar/Snowflake-Azure-DataFactory-Connector/master/images/Screenshot00010.png" alt="drawing" width="500"/>
+- Download the [SnowflakeADF.zip](https://github.com/NickAkincilar/Azure-DataFactory-ADF-Snowflake-Connector/blob/master/SnowflakeADF/SnowflakeADF.zip?raw=true) file and extract it on your computer in to a temp folder.
+- Drag & Drop both "**SnowflakeADF**" & "**bin**" folders on to \wwwroot path. (*UI is not intuitive but dragging & dropping a folder on the blank area below directory name starts the upload process*)  
+
+  
+
+
+<img src="https://github.com/NickAkincilar/Azure-DataFactory-ADF-Snowflake-Connector/blob/master/images/Powershell.png?raw=true" alt="drawing" width="600"/>
+
+
+  
+
+11. Once upload is complete, 
+- Switch back to **FunctionApp - Platform features** screen in previous browser tab
+- Click on **Configuration**
+
+  
+
+<img src="https://github.com/NickAkincilar/Azure-DataFactory-ADF-Snowflake-Connector/blob/master/images/AppConfig.png?raw=true" alt="drawing" width="600"/>
 
   
 
   
 
-12. Choose HTTP Trigger
+12. Create a **New Application Setting** under **application settings** 
 
   
 
   
 
-<img src="https://raw.githubusercontent.com/NickAkincilar/Snowflake-Azure-DataFactory-Connector/master/images/Screenshot00011.png" alt="drawing" width="500"/>
+- Click **New Application Setting**
+<img src="https://github.com/NickAkincilar/Azure-DataFactory-ADF-Snowflake-Connector/blob/master/images/newappsetting.png?raw=true" alt="drawing" width="600"/>
 
-  
+ - Set **Name** =  **passcode** (case sensitive)  then Set the **Value**  = **enter any encryption key** to be used to encypt URL parameters being sent back (***letters & numbers & upper case***)
+<img src="https://github.com/NickAkincilar/Azure-DataFactory-ADF-Snowflake-Connector/blob/master/images/newappsetting2.png?raw=true" alt="drawing" width="600"/>
+
+ - Don't forget to  **SAVE** the newly creared "**passcode**" setting. 
+
+<img src="https://github.com/NickAkincilar/Azure-DataFactory-ADF-Snowflake-Connector/blob/master/images/newappsetting3.png?raw=true" alt="drawing" width="600"/>
 
 13. Give it a unique name for the call
 

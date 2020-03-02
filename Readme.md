@@ -291,7 +291,7 @@ Typical usage would be to place this at the end of a data pipeline and issue a c
 
   
 
-<img src="https://github.com/NickAkincilar/Azure-DataFactory-ADF-Snowflake-Connector/blob/master/images/AppConfig.png?raw=true" alt="drawing" width="600"/>
+<img src="https://github.com/NickAkincilar/Azure-DataFactory-ADF-Snowflake-Connector/blob/master/images/AppConfig.png?raw=true" alt="drawing" width="400"/>
 
   
 
@@ -304,14 +304,14 @@ Typical usage would be to place this at the end of a data pipeline and issue a c
   
 
 - Click **New Application Setting**
-<img src="https://github.com/NickAkincilar/Azure-DataFactory-ADF-Snowflake-Connector/blob/master/images/newappsetting.png?raw=true" alt="drawing" width="600"/>
+<img src="https://github.com/NickAkincilar/Azure-DataFactory-ADF-Snowflake-Connector/blob/master/images/newappsetting.png?raw=true" alt="drawing" width="400"/>
 
  - Set **Name** =  **passcode** (case sensitive)  then Set the **Value**  = **enter any encryption key** to be used to encypt URL parameters being sent back (***letters & numbers & upper case***)
-<img src="https://github.com/NickAkincilar/Azure-DataFactory-ADF-Snowflake-Connector/blob/master/images/newappsetting2.png?raw=true" alt="drawing" width="600"/>
+<img src="https://github.com/NickAkincilar/Azure-DataFactory-ADF-Snowflake-Connector/blob/master/images/newappsetting2.png?raw=true" alt="drawing" width="400"/>
 
  - Don't forget to  **SAVE** the newly creared "**passcode**" setting. 
 
-<img src="https://github.com/NickAkincilar/Azure-DataFactory-ADF-Snowflake-Connector/blob/master/images/newappsetting3.png?raw=true" alt="drawing" width="600"/>
+<img src="https://github.com/NickAkincilar/Azure-DataFactory-ADF-Snowflake-Connector/blob/master/images/newappsetting3.png?raw=true" alt="drawing" width="400"/>
 
 13. Give it a unique name for the call
 

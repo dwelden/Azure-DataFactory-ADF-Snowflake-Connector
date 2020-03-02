@@ -1,5 +1,5 @@
 
-# Azure Data Factory ADF Snowflake Connector V3 (Dynamic Credentials & SQL with no timeouts ) #
+# Azure Data Factory ADF Snowflake Connector V3 (*Parameterized Credentials & SQL Queries with no ADF timeouts* ) #
 
   
 
@@ -25,10 +25,12 @@ Because of these limitations, my first version of ADF Snowflake connector execut
  
  - They needed the use query outcome (suchs rows effected) to use it in their pipeline decisions down stream.
  - They prefered not to pay for dedicated Function App instances.
+ 
 
 
 
-## SO HOW DOES IT WORK?
+
+# SO HOW DOES IT WORK?
 
 
 
@@ -44,47 +46,24 @@ Solution is a regular Azure Function app which mimics the output of a Durable fu
  8. if the WEB step gets a response indicating status is RUNNING, it re-tries the same URL in X seconds configured in its properties. If Status is COMPLETE, it receives a JSON payload showing the QueryExecution results from the History View such as Status, RecordsEffected & etc. When this happens, it stops retrying and passes the JSON as its output.
  9. ADF users can then use these results to drive their ADF pipeline logic downstream to make new call.
 
-Using this technique that mimics a durable function, this regular function never waits for long running queries to execute. It just passes them to snowflake and moves on w/o getting a response and gets their QueryID to report back to the caller . Subsequents calls for Status checks are executed quickly against the query_history view using the Query_ID and take few seconds at most. This way each REST call whether it is to execute a ETL query or for a Status check, is responded within seconds without any Azure timeout limitaions and final outcome is a query status of SUCCESS or FAIL along with JSON payload of query_execution results if it is a PASS.
+**As a result, this function never waits for long running queries to execute.** It just passes them to snowflake and moves on w/o getting a response and gets their QueryID to report back to the caller . Subsequents calls for Status checks are executed quickly against the query_history view using the Query_ID and take few seconds at most. This way each REST call whether it is to execute a ETL query or for a Status check, is responded within seconds without any Azure timeout limitaions and final outcome is a query status of SUCCESS or FAIL along with JSON payload of query_execution results if it is a PASS.
 
-All you have to do is to add 2 ADF steps for each ETL call to snowflake. First workflow step is the AzureFunction call with the Query you want to execute. Second step is a Web step to wait until the original query is executed by repeatedly calling the Status URL which is the output of Step1.
+**All you have to do is to add 2 ADF steps for each ETL call to snowflake.** First workflow step is the AzureFunction call with the Query you want to execute. Second step is a Web step to wait until the original query is executed by repeatedly calling the Status URL which is the output of Step1.
 
- Here is how you install & configure the Azure data factory and the function:
 
-ist item
 
-  
-
-Typical usage would be to place this at the end of a data pipeline and issue a copy command from Snowflake once Data Factory generates data files in an Azure blob storage.
-
-  
+**...Below is an architectural diagram of the solution showing a data ingestion from an Azure Blob storage.**  
 
 <img src="https://github.com/NickAkincilar/Azure-DataFactory-ADF-Snowflake-Connector/blob/master/images/ADF_Function_Chart.png?raw=true" alt="drawing" width="900"/>
 
   
 
-Function is essentially a rest endpoint which accepts a POST request which needs to contain the following JSON payload in the body of the request. JSON payload is a combination of SF connection parameters plus the SQL command that needs to be executed.
-
-  
-
-Execution Logic is follows:
-
-1. Create an ADF data pipe line to create necessary data files on a Azure blob stage
-
-2. ADF creates data file(s) in the Azure blob storage
-
-3. Upon successfull execution of step 2, ADF makes a call to Snowflake_ADF Azure function with a JSON data (Configure JSON body with connection + proper copy command to execute )
-
-4. Snowflake_ADF Function makes a .Net connection to Snowflake using the connection parameteres from JSON payload and executes the embedded SQL command.
-
-5. Snowflake executes the COPY from @STAGE command to ingest the newly created files by ADF.
-
-  
 
 <hr>
 
   
 
-Connection attributes & the SQL command can be inserted in to JSON two different ways.
+Connection attributes & the SQL command can be inserted in to JSON as **hard coded values** or **Dynamic/Hidden variables.**
 
   
 
@@ -157,9 +136,13 @@ You can use web requests to fetch Azure Vault Secrets & set it as variable value
 
 <img src="https://raw.githubusercontent.com/NickAkincilar/Snowflake-Azure-DataFactory-Connector/master/images/Credentials_Static.png" alt="drawing" width="500"/>
 
-  
+  # HOW TO INSTALL & CONFIGURE?
 
-# Setup (Part 1) - Create Snowflake Azure Function
+
+
+Typical usage would be to place this at the end of a data pipeline and issue a copy command from Snowflake once Data Factory generates data files in an Azure blob storage.
+
+## Setup (Part 1) - Create Snowflake Azure Function
 
   
 

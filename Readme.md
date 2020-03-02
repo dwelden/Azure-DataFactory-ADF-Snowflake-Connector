@@ -21,26 +21,28 @@ When using Azure Funtions in ADF, there are two seperate time-outs that you have
 
 Because of these limitations, my first version of ADF Snowflake connector execute any query as passthrough which meant that it sent it but did not wait for an answer and always reported success. This mean, ADF developers had to monitor Snowflake if any of the pipeline steps failed or not.  After my inital version, the feedback I got from Snowflake users was pretty much the same things.
 
- - They wanted a solution where ADF step should to fail if the Query failed so they could tell the pipeline failed from ADF w/o monitoring snowflake query history.
+ - They wanted a solution where ADF step failed if the Query failed in Snowflake so they could fail the pipeline directly from ADF & without manually monitoring snowflake query history.
+ 
  - They needed the use query outcome (suchs rows effected) to use it in their pipeline decisions down stream.
  - They prefered not to pay for dedicated Function App instances.
 
-**
+
 
 ## SO HOW DOES IT WORK?
 
-**
 
-Solution was a regular app that mimiced the output of a Durable function. Major change was where the durable function was actually executing & waiting for query to be finished to report back the result, I had to build something that didnt waited around for long runnning queries to finish. Below is how it was done to satisfy all 3 requests from Ver1 users.
 
- 1. ADF makes a rest call to Snowflake_Function & submits a JSON payload. (JSON includes Snowflake connection parameters + the SQL statement to execute)
- 2. Snowflake_Function add a unique comment tag to the end of the SQL query for tracking purposes & executes it as a ExecuteNonQuery which means it doesnt wait for a result & moves on.
- 3. It then immediately queries the Snowflake_Query_History view for that unique tag to find the QUERYID of that original query. (it will repeat this every 5 secs for a min until it can locate it). It runs this as a regular query since it runs quickly & returns a single row.
- 4. it appends the QUERYID + Connection parameters in to string then encrypts it using a custom PASSCODE value you define as part of the setup. It immedeately replies to ADF with a status URL that includes this encrypted text as a URL parameter.
- 5.  Snowflake_Function's output is a URL that allows ADF WEB request to monitor the status of the original query. URL includes encrypted info about the QUERYID & the snowflake connection parameters. 
- 6. When WEB step call the STATUS URL, function recognizes this a STATUS check instead of new SQL QUERY. It decypts the URL parameters to extract the QueryID + Connection Info. Then queries the Snowflake query_history view for that QueryID using the connection info that it receives. It checks the Query_Status columns and responds back based on different statuses such as COMPLETE, RUNNING, FAILED & etc. Response also has specific HTTP Status codes to let an ADF WEB step to retry if the status is not complete.
- 7. if the WEB step gets a response indicating status is RUNNING, it re-tries the same URL in X seconds configured in its properties. If Status is COMPLETE, it receives a JSON payload showing the QueryExecution results from the History View such as Status, RecordsEffected & etc. When this happens, it stops retrying and passes the JSON as its output.
- 8. ADF users can then use these results to drive their ADF pipeline logic downstream to make new call.
+Solution is a regular Azure Function app which mimics the output of a Durable function. Major change was where the durable function was actually executing & waiting for original query to be finished to report back the result, I had to build something that didnt waited around for long runnning queries to finish. Below is how it was done to satisfy all 3 requests from Ver-1 users.
+
+ 1. ADF makes a rest call to Snowflake_Function & submits a JSON payload with a Query to execute. (JSON includes Snowflake connection parameters + the SQL statement )
+ 
+ 3. Snowflake_Function add a unique comment tag to the end of the SQL query for tracking purposes & executes it as a ExecuteNonQuery which means it doesnt wait for a result & moves on.
+ 4. It then immediately queries the Snowflake_Query_History view for that unique tag to find the QUERYID of that original query. (it will repeat this every 5 secs for a min until it can locate it). It runs this as a regular query since it runs quickly & returns a single row.
+ 5. it appends the QUERYID + Connection parameters in to string then encrypts it using a custom PASSCODE value you define as part of the setup. It immedeately replies to ADF with a status URL that includes this encrypted text as a URL parameter.
+ 6.  Snowflake_Function's output is a URL that allows ADF WEB request to monitor the status of the original query. URL includes encrypted info about the QUERYID & the snowflake connection parameters. 
+ 7. When WEB step call the STATUS URL, function recognizes this a STATUS check instead of new SQL QUERY. It decypts the URL parameters to extract the QueryID + Connection Info. Then queries the Snowflake query_history view for that QueryID using the connection info that it receives. It checks the Query_Status columns and responds back based on different statuses such as COMPLETE, RUNNING, FAILED & etc. Response also has specific HTTP Status codes to let an ADF WEB step to retry if the status is not complete.
+ 8. if the WEB step gets a response indicating status is RUNNING, it re-tries the same URL in X seconds configured in its properties. If Status is COMPLETE, it receives a JSON payload showing the QueryExecution results from the History View such as Status, RecordsEffected & etc. When this happens, it stops retrying and passes the JSON as its output.
+ 9. ADF users can then use these results to drive their ADF pipeline logic downstream to make new call.
 
 Using this technique that mimics a durable function, this regular function never waits for long running queries to execute. It just passes them to snowflake and moves on w/o getting a response and gets their QueryID to report back to the caller . Subsequents calls for Status checks are executed quickly against the query_history view using the Query_ID and take few seconds at most. This way each REST call whether it is to execute a ETL query or for a Status check, is responded within seconds without any Azure timeout limitaions and final outcome is a query status of SUCCESS or FAIL along with JSON payload of query_execution results if it is a PASS.
 

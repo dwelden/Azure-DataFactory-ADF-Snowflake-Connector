@@ -14,6 +14,8 @@
   
   
 
+FYI:This is not an official native Snowflake feature but uses the native .net drivers for communication with Snowflake.
+
 Finally easy to use Azure Data Factory (ADF) Snowflake connector that has no timeout issues for long running queries. This connector allows you to execute a single SQL statement at a time from ADF to execute in Snowflake warehouse. (*SQL can be any valid SQL including COPY, Select, Stored Procs, DML & etc.*)
 
   

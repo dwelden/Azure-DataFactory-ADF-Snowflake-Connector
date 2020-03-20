@@ -22,6 +22,8 @@ Finally easy to use Azure Data Factory (ADF) Snowflake connector that has no tim
 
 It took me a while make it work but I was finally able to create a function that could run in ADF without any timeout limitations using Azure's cheaper shared function plans vs. dedicated ones.
 
+<img src="https://github.com/NickAkincilar/Azure-DataFactory-ADF-Snowflake-Connector/blob/master/images/ADF_Function_Chart.png?raw=true" alt="drawing" width="900"/>
+
   
 ### Brief History on Limitations of Azure Functions for long running tasks ###
 <hr>

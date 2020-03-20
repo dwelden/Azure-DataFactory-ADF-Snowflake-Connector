@@ -70,13 +70,13 @@ Solution is a regular Azure Function app which mimics the output of a Durable fu
 
 4. It then immediately queries the Snowflake_Query_History view for that unique tag to find the QUERYID of that original query. (it will repeat this every 5 secs for a min until it can locate it). It runs this as a regular query since it runs quickly & returns a single row.
 
-5. it appends the QUERYID + Connection parameters in to string then encrypts it using a custom PASSCODE value you define as part of the setup. It immedeately replies to ADF with a status URL that includes this encrypted text as a URL parameter.
+5. it appends the QUERYID + Connection parameters in to string then encrypts it using a custom PASSCODE value you define as part of the setup. It immediately replies back to ADF with a URL that includes this encrypted text as part of the URL.
 
-6. Snowflake_Function's output is a URL that allows ADF WEB request to monitor the status of the original query. URL includes encrypted info about the QUERYID & the snowflake connection parameters.
+6. Status URL is what allows ADF WEB request to monitor the status of the original query. URL includes encrypted info about the QUERYID & the snowflake connection parameters.
 
-7. When WEB step call the STATUS URL, function recognizes this a STATUS check instead of new SQL QUERY. It decypts the URL parameters to extract the QueryID + Connection Info. Then queries the Snowflake query_history view for that QueryID using the connection info that it receives. It checks the Query_Status columns and responds back based on different statuses such as COMPLETE, RUNNING, FAILED & etc. Response also has specific HTTP Status codes to let an ADF WEB step to retry if the status is not complete.
+7. When the following WEB workflow step calls this STATUS URL, function recognizes this being a STATUS check instead of new SQL QUERY. It decrypts the URL to extract the QueryID & Connection Info. Then queries the Snowflake query_history view for that QueryID using the connection info that it receives. It checks the Query_Status columns and responds back based on different statuses such as COMPLETE, RUNNING, FAILED & etc. Response also has specific HTTP Status codes to let an ADF WEB step to retry if the status is not complete.
 
-8. if the WEB step gets a response indicating status is RUNNING, it re-tries the same URL in X seconds configured in its properties. If Status is COMPLETE, it receives a JSON payload showing the QueryExecution results from the History View such as Status, RecordsEffected & etc. When this happens, it stops retrying and passes the JSON as its output.
+8. if the WEB step gets a response indicating the status as RUNNING, it re-tries the same URL in X seconds configured in its properties. If Status comes back as COMPLETE, it receives a JSON payload showing the QueryExecution results from the History View such as Status, RecordsEffected & etc. When this happens, it stops retrying and passes the incoming JSON as its output.
 
 9. ADF users can then use these results to drive their ADF pipeline logic downstream to make new call.
 

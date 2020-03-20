@@ -66,7 +66,7 @@ Solution is a regular Azure Function app which mimics the output of a Durable fu
 
 1. ADF makes a rest call to Snowflake_Function & submits a JSON payload with a Query to execute. (JSON includes Snowflake connection parameters + the SQL statement )
 
-3. Snowflake_Function add a unique comment tag to the end of the SQL query for tracking purposes & executes it as a ExecuteNonQuery which means it doesnt wait for a result & moves on.
+3. Snowflake_Function appends a unique tag to the end of the SQL query in the form of a SQL comment for tracking this query later on in history & executes it as a ExecuteNonQuery which means it doesnt wait for a result & moves on.
 
 4. It then immediately queries the Snowflake_Query_History view for that unique tag to find the QUERYID of that original query. (it will repeat this every 5 secs for a min until it can locate it). It runs this as a regular query since it runs quickly & returns a single row.
 

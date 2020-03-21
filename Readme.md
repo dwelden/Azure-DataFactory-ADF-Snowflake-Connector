@@ -1,7 +1,7 @@
 
   
 
-# Azure Data Factory ADF Snowflake Connector V3 (*Parameterized Credentials & Long SQL Queries without timeouts* ) #
+# Azure Data Factory ADF Snowflake Connector V3 (*Support Long running Queries with no function timeouts* ) #
 
   
 
